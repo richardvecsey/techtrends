@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -23,9 +23,5 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64
           push: true
-          # Tags contains the repository name because it is mentioned in the
-          # official tutorial at github:
-          # https://github.com/marketplace/actions/build-and-push-docker-images
           tags: richardvecsey/techtrends:latest
