@@ -14,6 +14,9 @@ def current_time():
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
+
+    global connection_count
+
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
     connection_count += 1

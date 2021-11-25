@@ -6,21 +6,21 @@ metadata:
 
   labels:
 
-    app: techtrends
+    app: {{ .Values.AppName }}
 
-  name: techtrends
+  name: {{ .Values.AppName }}
 
-  namespace: sandbox
+  namespace: {{ .Values.namespace.name }}
 
 spec:
 
-  replicas: 1
+  replicas:  {{ .Values.replicaCount }}
 
   selector:
 
     matchLabels:
 
-      app: techtrends
+      app: {{ .Values.AppName }}
 
   template:
 
@@ -28,7 +28,7 @@ spec:
 
       labels:
 
-        app: techtrends
+        app: {{ .Values.AppName }}
 
     spec:
 
@@ -36,7 +36,7 @@ spec:
 
       - image: richardvecsey/techtrends:latest
 
-        name: techtrends
+        name: {{ .Values.AppName }}
 
         ports:
 
@@ -48,17 +48,25 @@ spec:
 
           httpGet:
 
-            path: /healthz
+            path: {{ .Values.livenessProbe.path }}
 
-            port: 3111
+            port: {{ .Values.livenessProbe.port }}
+
+          initialDelaySeconds: 30
+
+          periodSeconds: 3
 
         readinessProbe:
 
           httpGet:
 
-            path: /healthz
+            path: {{ .Values.readinessProbe.path }}
 
-            port: 3111
+            port: {{ .Values.readinessProbe.port }}
+
+          initialDelaySeconds: 30
+
+          periodSeconds: 3
 
         resources:
 
