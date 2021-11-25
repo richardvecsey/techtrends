@@ -1,6 +1,6 @@
-apiVersion: apps/v1
+apiVersion: {{ .Values.apiVersion.long }}
 
-kind: Deployment
+kind: {{ .Values.kind.fordeploy }}
 
 metadata:
 
@@ -78,6 +78,6 @@ spec:
 
           limits:
 
-            memory: {{ .Values.limits.requests.memory }}
+            memory: {{ .Values.resources.limits.memory }}
 
-            cpu: {{ .Values.limits.requests.cpu }}
+            cpu: {{ .Values.resources.limits.cpu }}

@@ -1,7 +1,7 @@
-apiVersion: v1
+apiVersion: {{ .Values.apiVersion.short }}
 
-kind: Namespace
+kind: {{ .Values.kind.fornamespace }}
 
 metadata:
 
-  name: sandbox
+  name: {{ .Values.namespace.name }}
