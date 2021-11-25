@@ -1,10 +1,12 @@
 import logging # NOTE: This import is needed to the logging features
 import sqlite3
+import sys
 
 from datetime import datetime #  NOTE: This import is needed for logging
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
+connection_count = 0
 
 def current_time():
     return datetime.now().strftime('%m/%d/%Y, %H:%M:%S')
@@ -14,6 +16,7 @@ def current_time():
 def get_db_connection():
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+    connection_count += 1
     return connection
 
 # Function to get a post using its ID
@@ -131,6 +134,12 @@ def get_metrics():
 # start the application on port 3111
 if __name__ == "__main__":
     # Debug logging to a console
-    logging.basicConfig(level=logging.DEBUG)
+    stderr_handler = logging.StreamHandler(stream=sys.stderr)
+    stdout_handler = logging.StreamHandler(stream=sys.stdout)
+    handlers = [stderr_handler, stdout_handler]
+    log_format = '%(asctime)s - %(funcName)s - %(message)s'
+    logging.basicConfig(level=logging.DEBUG,
+                        format=log_format,
+                        handlers=handlers)
     # NOTE: The next line is moved right due to indenting error
     app.run(host='0.0.0.0', port='3111')
