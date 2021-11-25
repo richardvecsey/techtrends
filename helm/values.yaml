@@ -1,4 +1,18 @@
+apiVersion:
+
+  long: apps/v1
+  
+  short: v1
+
 AppName: techtrends
+
+kind:
+
+  fordeploy: Deployment
+  
+  fornamespace: Namespace 
+  
+  forservice: Service
 
 namespace:
 
@@ -9,6 +23,8 @@ metadata:
   containers:
 
     image: richardvecsey/techtrends:latest
+  
+  name: techtrends
 
 service:
 
