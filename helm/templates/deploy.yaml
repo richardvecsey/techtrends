@@ -6,11 +6,11 @@ metadata:
 
   labels:
 
-    app: {{ .Values.AppName }}
+    app: techtrends
 
-  name: {{ .Values.AppName }}
+  name: techtrends
 
-  namespace: {{ .Values.namespace.name }}
+  namespace: sandbox
 
 spec:
 
@@ -20,7 +20,7 @@ spec:
 
     matchLabels:
 
-      app: {{ .Values.AppName }}
+      app: techtrends
 
   template:
 
@@ -28,7 +28,7 @@ spec:
 
       labels:
 
-        app: {{ .Values.AppName }}
+        app: techtrends
 
     spec:
 
@@ -36,7 +36,7 @@ spec:
 
       - image: richardvecsey/techtrends:latest
 
-        name: {{ .Values.AppName }}
+        name: techtrends
 
         ports:
 
