@@ -1,9 +1,5 @@
 AppName: techtrends
 
-apiVersion: apps/v1
-
-kind: Deployment
-
 namespace:
 
   name: sandbox

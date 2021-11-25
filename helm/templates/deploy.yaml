@@ -1,6 +1,6 @@
-apiVersion: {{ .Values.apiVersion }}
+apiVersion: apps/v1
 
-kind: {{ .Values.kind }}
+kind: Deployment
 
 metadata:
 
