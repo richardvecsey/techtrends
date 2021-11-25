@@ -1,16 +1,16 @@
-apiVersion: apps/v1
+apiVersion: {{ .Values.apiVersion }}
 
-kind: Deployment
+kind: {{ .Values.kind }}
 
 metadata:
 
   labels:
 
-    app: techtrends
+    app: {{ .Values.AppName }}
 
-  name: techtrends
+  name: {{ .Values.AppName }}
 
-  namespace: sandbox
+  namespace: {{ .Values.namespace.name }}
 
 spec:
 
@@ -20,7 +20,7 @@ spec:
 
     matchLabels:
 
-      app: techtrends
+      app: {{ .Values.AppName }}
 
   template:
 
@@ -28,21 +28,21 @@ spec:
 
       labels:
 
-        app: techtrends
+        app: {{ .Values.AppName }}
 
     spec:
 
       containers:
 
-      - image: richardvecsey/techtrends:latest
+      - image: {{ .Values.metadata.containers.image }}
 
-        name: techtrends
+        name: {{ .Values.AppName }}
 
         ports:
 
-          - containerPort: 3111
+          - containerPort: {{ .Values.containerPort }}
 
-            protocol: TCP
+            protocol: {{ .Values.service.protocol }}
 
         livenessProbe:
 
@@ -52,9 +52,9 @@ spec:
 
             port: {{ .Values.livenessProbe.port }}
 
-          initialDelaySeconds: 30
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
 
-          periodSeconds: 3
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
 
         readinessProbe:
 
@@ -64,20 +64,20 @@ spec:
 
             port: {{ .Values.readinessProbe.port }}
 
-          initialDelaySeconds: 30
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
 
-          periodSeconds: 3
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
 
         resources:
 
           requests:
 
-            memory: "64Mi"
+            memory: {{ .Values.resources.requests.memory }}
 
-            cpu: "250m"
+            cpu: {{ .Values.resources.requests.cpu }}
 
           limits:
 
-            memory: "128Mi"
+            memory: {{ .Values.limits.requests.memory }}
 
-            cpu: "500m"
+            cpu: {{ .Values.limits.requests.cpu }}

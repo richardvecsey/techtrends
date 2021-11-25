@@ -1,6 +1,18 @@
+AppName: techtrends
+
+apiVersion: apps/v1
+
+kind: Deployment
+
 namespace:
 
   name: sandbox
+
+metadata:
+
+  containers:
+
+    image: richardvecsey/techtrends:latest
 
 service:
 
@@ -44,8 +56,16 @@ livenessProbe:
 
   port: 3111
 
+  initialDelaySeconds: 30
+
+  periodSeconds: 3
+
 readinessProbe:
 
   path: /healthz
 
   port: 3111
+
+  initialDelaySeconds: 30
+
+  periodSeconds: 3

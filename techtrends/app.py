@@ -50,12 +50,12 @@ def post(post_id):
     if post is None:
       # DONE: logging
       message = 'Article under "{}" post ID does not exist.'.format(post_id)
-      app.logger.debug('[{}] "{}"'.format(current_time()), message)
+      app.logger.debug('[{}] "{}"'.format(current_time(), message))
       return render_template('404.html'), 404
     else:
       # DONE: logging
       message = 'Article under "{}" post ID retrieved.'.format(post_id)
-      app.logger.debug('[{}] "{}"'.format(current_time()), message)
+      app.logger.debug('[{}] "{}"'.format(current_time(), message))
       return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -63,7 +63,7 @@ def post(post_id):
 def about():
     # DONE: logging
     message = 'About us page retrieved.'
-    app.logger.debug('[{}] "{}"'.format(current_time()), message)
+    app.logger.debug('[{}] "{}"'.format(current_time(), message))
     return render_template('about.html')
 
 # Define the post creation functionality
@@ -82,7 +82,7 @@ def create():
             connection.commit()
             # DONE: logging
             message = 'New article is created under {} title.'.format(title)
-            app.logger.debug('[{}] "{}"'.format(current_time()), message)
+            app.logger.debug('[{}] "{}"'.format(current_time(), message))
             connection.close()
 
             return redirect(url_for('index'))
